@@ -1,0 +1,67 @@
+aside {
+    min-height: 600px;
+    min-width: 300px;
+    padding: 0px 1%;
+    margin-top: 45px;
+}
+
+aside ul {
+    padding: 2% 5%;
+    width: 100%;
+    padding: 0;
+}
+
+ul .task-list-a {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    padding: 2% 5px;
+    font-size: 18px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    align-items: center;
+    border-radius: 10px;
+}
+
+div .task-list-b {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    padding: 2% 5px;
+    font-size: 18px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    align-items: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.task-list-a button {
+    margin-left: 12px;
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    background-color: var(---green);
+    color: white;
+    border-radius: 20px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.task-list-a button:hover {
+    background-color: var(---green-hover);
+}
+
+.task-list-a label:hover {
+    cursor: pointer;
+    color: darkgrey;
+}
+
+@media screen and (max-width: 593px) {
+  aside {
+    min-height: 0px;
+    min-width: 150px;
+    padding: none;
+    max-width: 100%;
+  }
+}
