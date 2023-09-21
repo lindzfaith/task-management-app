@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { List, Sidebar } from './components';
 
 function App() {
@@ -7,11 +7,12 @@ function App() {
   const [currentList, setCurrentList] = useState( 
     taskLists.length > 0 ? taskLists[0] : null );
 
-  const updateStorage = (lists) => {
+  const updateStorage = async (lists) => {
     localStorage.setItem('taskLists', JSON.stringify(lists));
   };
 
-  const getTaskList = async () => {
+  // get tasks from memory
+  const getTaskList = React.useCallback(() => {
     const taskListsJson = localStorage.getItem('taskLists');
     if (taskListsJson) {
       const parsedTaskLists = JSON.parse(taskListsJson);
@@ -20,16 +21,18 @@ function App() {
         setCurrentList(parsedTaskLists[0]);
       }
     }
-  };
+  }, [currentList]);
   
-  const createTaskList = (title) => {
+  // create a task list
+  const createTaskList = async (title) => {
       const copy = [...taskLists]; 
       copy.push({ title: title, tasks: [], marked: false });
       setTaskLists(copy);
       setCurrentList(copy[copy.length - 1]);
+      updateStorage(copy);
   };
 
-  const createTaskForList = (title, text) => {
+  const createTaskForList = async (title, text) => {
     const copy = [...taskLists];
     for (let i = 0; i < copy.length; i++) {
       if (title === copy[i].title) {
@@ -39,7 +42,7 @@ function App() {
         }
       }
     } 
-    setTaskLists(copy);
+    updateStorage(copy);
   };
 
   const deleteTaskList = (title) => {
@@ -56,6 +59,7 @@ function App() {
         setCurrentList(null);
       }
     }
+    updateStorage(copy);
   }
 
   const deleteTaskFromList = (title, task) => {
@@ -70,6 +74,7 @@ function App() {
     }
     // set the task list to the copy
     setTaskLists(copy);
+    updateStorage(copy);
   }
 
   const selectList = (list) => {
@@ -99,15 +104,12 @@ function App() {
         }
       }
     }
+    updateStorage(copy);
   }
 
   React.useEffect(() => {
     getTaskList();
-  }, []);
-
-  React.useEffect(() => {
-    updateStorage(taskLists);
-  }, []);
+  }, [getTaskList]);
 
   return (
     <div className="App">
