@@ -16,17 +16,17 @@ function TaskList({ tasks, title, onAdd, onDelete, onMarked }) {
         <ul>
         {tasks.map((task) => (
             <li id={task.id} key={task.id} className={cx("task-item", task.marked ? "marked" : "")}>
-            {task.text}
-            <div id={task.id} className="task-item-button">
-                <button onClick={() => onMarked(title, task.id)} className="mark-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="#FFF" height="1em" viewBox="0 0 448 512">
-                        <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/>
-                    </svg>
-                </button>
-                <button name={title} onClick={(e) => remove(e)} className="delete-button">
-                    X
-                </button>
-            </div>
+                <label>{task.text}</label>
+                <div id={task.id} className="task-item-button">
+                    <button onClick={() => onMarked(title, task.id)} className="mark-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="#FFF" height="1em" viewBox="0 0 448 512">
+                            <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/>
+                        </svg>
+                    </button>
+                    <button name={title} onClick={(e) => remove(e)} className="delete-button">
+                        X
+                    </button>
+                </div>
             </li>
         ))}
         </ul>

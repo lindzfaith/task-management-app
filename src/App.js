@@ -36,7 +36,13 @@ function App() {
     const copy = [...taskLists];
     for (let i = 0; i < copy.length; i++) {
       if (title === copy[i].title) {
-        copy[i].tasks[copy[i].tasks.length] = {text: text, id: `${title}-${copy[i].tasks.length}`};
+        let index = copy[i].tasks.length;
+        for (let j = 0; j < copy[i].tasks.length; j++) {
+          if (copy[i].tasks[j].marked && j < index) {
+            index = j;
+          }
+        }
+        copy[i].tasks.splice(index, 0, {text: text, id: `${title}-${copy[i].tasks.length}`});
         if (title === currentList.title) {
           setCurrentList(copy[i]);
         }
