@@ -11,6 +11,19 @@ function App() {
     localStorage.setItem('taskLists', JSON.stringify(lists));
   };
 
+  const setTitle = (oldTitle, newTitle) => {
+    const copy = [...taskLists];
+    for (let i = 0; i < copy.length; i++) {
+      if (oldTitle === copy[i].title) {
+        copy[i].title = newTitle;
+        if (oldTitle === currentList.title) {
+          setCurrentList(copy[i]);
+        }
+      }
+    } 
+    updateStorage(copy);
+  };
+
   // get tasks from memory
   const getTaskList = React.useCallback(() => {
     const taskListsJson = localStorage.getItem('taskLists');
@@ -123,7 +136,7 @@ function App() {
         <h1>TaskFriend</h1>
       </header>
       <main>
-        <Sidebar lists={taskLists} onAdd={createTaskList} onDelete={deleteTaskList} onSelect={selectList} />
+        <Sidebar lists={taskLists} onAdd={createTaskList} onDelete={deleteTaskList} onSelect={selectList} onEdit={setTitle} />
         {currentList && <List title={currentList.title} onAdd={createTaskForList} tasks={currentList.tasks} onDelete={deleteTaskFromList} onMarked={markTaskComplete}/>}
       </main>
     </div>
