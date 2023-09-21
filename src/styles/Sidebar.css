@@ -57,11 +57,17 @@ div .task-list-b {
     color: darkgrey;
 }
 
-@media screen and (max-width: 593px) {
+@media screen and (max-width: 613px) {
   aside {
     min-height: 0px;
     min-width: 150px;
     padding: none;
     max-width: 100%;
+  }
+  .task-list-b input {
+    width: 70%;
+  }
+  ul .task-list-a, div .task-list-b {
+    width: 100%;
   }
 }

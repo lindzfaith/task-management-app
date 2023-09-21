@@ -57,3 +57,9 @@ main {
     transform: rotate(360deg);
   }
 }
+
+@media screen and (max-width: 613px) {
+  main {
+    align-items: baseline;
+  }
+}

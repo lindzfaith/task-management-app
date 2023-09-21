@@ -7,14 +7,6 @@ function App() {
   const [currentList, setCurrentList] = useState( 
     taskLists.length > 0 ? taskLists[0] : null );
 
-    React.useEffect(() => {
-      getTaskList();
-    }, []);
-
-  React.useEffect(() => {
-    updateStorage(taskLists);
-  }, []);
-
   const updateStorage = (lists) => {
     localStorage.setItem('taskLists', JSON.stringify(lists));
   };
@@ -97,22 +89,30 @@ function App() {
             let copyOfTask = copy[i].tasks[j];
             copyOfTask.marked = true;
             // move to end of list is marked out
-            if (copyOfTask.marked)  {
-              let copyOfTasks = [...copy[i].tasks];
-              copyOfTasks.splice(j, 1);
-              copyOfTasks[copyOfTasks.length] = copyOfTask;
-              copy[i].tasks = [...copyOfTasks];
-              setTaskLists(copy);
-              setCurrentList(copy[i]);
-            } 
+            let copyOfTasks = [...copy[i].tasks];
+            copyOfTasks.splice(j, 1);
+            copyOfTasks[copyOfTasks.length] = copyOfTask;
+            copy[i].tasks = [...copyOfTasks];
+            setTaskLists(copy);
+            setCurrentList(copy[i]);
           }
         }
       }
     }
   }
+
+  React.useEffect(() => {
+    getTaskList();
+  }, []);
+
+  React.useEffect(() => {
+    updateStorage(taskLists);
+  }, []);
+
   return (
     <div className="App">
       <header>
+        <h1>TaskFriend</h1>
       </header>
       <main>
         <Sidebar lists={taskLists} onAdd={createTaskList} onDelete={deleteTaskList} onSelect={selectList} />
