@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { List, Sidebar } from './components';
 
 function App() {
@@ -112,7 +112,7 @@ function App() {
           if (task === taskLists[i].tasks[j].id) {
             let copyOfTask = copy[i].tasks[j];
             copyOfTask.marked = true;
-            // move to end of list is marked out
+            // move to end of list if it is marked out
             let copyOfTasks = [...copy[i].tasks];
             copyOfTasks.splice(j, 1);
             copyOfTasks[copyOfTasks.length] = copyOfTask;
@@ -133,7 +133,7 @@ function App() {
   return (
     <div className="App">
       <header>
-        <h1>TaskFriend</h1>
+        <h1>YourTaskFriend</h1>
       </header>
       <main>
         <Sidebar lists={taskLists} onAdd={createTaskList} onDelete={deleteTaskList} onSelect={selectList} onEdit={setTitle} />

@@ -12,7 +12,7 @@ function TaskList({ tasks, title, onAdd, onDelete, onMarked }) {
     }
   return (
     <div className="task-list">
-        <label className="task-title">{title}</label>
+        <label className="task-description">{title}</label>
         <ul>
         {tasks.map((task) => (
             <li id={task.id} key={task.id} className={cx("task-item", task.marked ? "marked" : "")}>
